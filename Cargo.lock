@@ -239,6 +239,7 @@ name = "chat"
 version = "0.1.0"
 dependencies = [
  "async-std",
+ "futures-lite 1.13.0",
  "serde",
  "serde_json",
  "tokio",
