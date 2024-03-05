@@ -4,19 +4,19 @@ use async_std::prelude::*;
 use async_std::sync::{Arc, Mutex};
 use chat::utils::{self, ChatResult};
 use chat::{Client, Server};
-use crate::chats_map::ChatTracker;
+use crate::chat_map::ChatTracker;
 
 pub struct Leaving(Mutex<TcpStream>);
 
 impl Leaving {
     pub fn new(client: TcpStream) -> Leaving {
-        Leaving(Mutex::new(client));
+        Leaving(Mutex::new(client))
     }
 
     pub async fn send(&self, packet: Server) -> ChatResult<()> {
         let mut lock = self.0.lock().await;
 
-        utils::send_json(&mut lock, &packet).await?;
+        utils::send_json( &mut lock, &packet).await?;
         lock.flush().await?;
 
         Ok(())

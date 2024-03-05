@@ -1,6 +1,7 @@
 use std::collections::HashMap;
-use std::synv::Arc::{Arc, Mutex};
-use crate::chats::Chats;
+use std::sync::{Arc, Mutex};
+use crate::chats_going::Chats;
+
 
 pub struct ChatTracker(Mutex<HashMap<Arc<String>, Arc<Chats>>>);
 
@@ -9,7 +10,7 @@ pub struct ChatTracker(Mutex<HashMap<Arc<String>, Arc<Chats>>>);
             ChatTracker(Mutex::new(HashMap::new()))
         }
 
-        pub fn find(&self, name: &Sring) -> Option<Arc<Chats>> {
+        pub fn find(&self, name: &String) -> Option<Arc<Chats>> {
             self.0.lock().unwrap().get(name).cloned()
         }
 
